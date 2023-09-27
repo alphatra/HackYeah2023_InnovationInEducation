@@ -1,0 +1,68 @@
+version: '3.8'
+services:
+  # Backend
+  backend:
+    build: ./backend
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 8000:8000
+    depends_on:
+    - hackyeah_db
+    networks:
+      - app_network
+
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    ports:
+      - "3000:3000"
+    networks:
+      - app_network
+
+  # Database
+  hackyeah_db:
+    image: mysql:latest
+    volumes:
+      - hackyeah_db:/var/lib/mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'hackyeah_db'
+      MYSQL_PASSWORD: 'password'
+    networks:
+      - app_network
+
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - hackyeah_db
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: hackyeah_db
+      MYSQL_ROOT_PASSWORD: 'password'
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  hackyeah_db:
+  frontend:
+  backend:  
+  
