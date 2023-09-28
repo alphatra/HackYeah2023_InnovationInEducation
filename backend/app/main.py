@@ -8,9 +8,9 @@ from typing import List
 app = FastAPI()
 
 # Database connection
-DATABASE_URL="mysql+mysqlconnector://root:password@hackyeah_db:3306/hackyeah_db"
+DATABASE_URL = "mysql+mysqlconnector://root:password@hackyeah_db:3306/hackyeah_db"
+engine = create_engine(DATABASE_URL, echo=True)
 
-engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Model items
@@ -19,21 +19,16 @@ Base = declarative_base()
 class Item(Base):
     __tablename__ = "items"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    question = Column(Text(), index=True)
-    
+    question = Column(String(255), index=True)
     answers = relationship("Answer", back_populates="quest")
 
 class Answer(Base):
     __tablename__ = "answers"
-
     answer_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     answer = Column(String(255), index=True)
-    question_id = Column(Integer, ForeignKey("items.id"))
-
+    question_id = Column(Integer, ForeignKey("items.id", ondelete="CASCADE", onupdate="CASCADE"))
     quest = relationship("Item", back_populates="answers")
-    
-   
-    
+
 class Answer_sch(BaseModel):
     answer_id: int
     answer: str
@@ -44,17 +39,14 @@ class Answer_sch(BaseModel):
 class Item_sch(BaseModel):
     question: str
     answers: list[str]
-
     class Config:
         orm_mode = True
 
 class ItemResponse(BaseModel):
     question: str
     answers: List[str]
-
     class Config:
         orm_mode = True
-
 
 @app.on_event("startup")
 def startup_db_client():
