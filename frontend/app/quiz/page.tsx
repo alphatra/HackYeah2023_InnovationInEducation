@@ -14,6 +14,8 @@ type QuestionDef = {
   answers: AnswerDef[];
 };
 
+export const dynamic = "force-dynamic";
+
 async function getQuestions(): Promise<QuestionDef[]> {
   const res = await fetch("http://localhost:8000/get_items", {
     cache: "no-store",
