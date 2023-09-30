@@ -8,9 +8,9 @@ export function Check(props: ComponentProps<"svg">) {
         points="40 144 96 200 224 72"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="24"
       />
     </svg>
   );
