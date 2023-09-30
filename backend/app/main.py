@@ -43,6 +43,7 @@ class Item_sch(BaseModel):
         orm_mode = True
 
 class ItemResponse(BaseModel):
+    id: int
     question: str
     answers: List[str]
     class Config:
@@ -94,7 +95,7 @@ def get_items(db: Session = Depends(get_db)):
         answers = [ans.answer for ans in item.answers]
         
         # Create a response model for each item
-        item_response = ItemResponse(question=item.question, answers=answers)
+        item_response = ItemResponse(id=item.id, question=item.question, answers=answers)
         item_responses.append(item_response)
 
     return item_responses
