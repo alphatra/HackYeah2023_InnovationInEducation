@@ -1,95 +1,33 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { Header } from "@/components/header";
+import { ArrowDown } from "@/components/icons/arrow-down";
+import { Stop } from "@/components/stop";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <Header />
+      <div className="relative container mx-auto h-[800px] flex flex-col items-center justify-center">
+        <div className="absolute z-0 rounded-b-[50px] overflow-hidden w-full h-full before:content-[''] before:z-10 before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-gradient-radial before:from-transparent before:via-black/50 before:to-black">
+          <Image
+            alt="People"
+            src="/hero.png"
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+          />
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <Stop className="w-[340px] z-10" />
+        <h1 className="text-[70px] font-bold relative z-10 text-white text-center w-full leading-tight">
+          Examine All Possibilities,
+          <br />
+          Pick the Best One
+        </h1>
+        <button className="rounded-full bg-white hover:translate-y-2 transition-all active:bg-gray-50 p-4 justify-between font-mono flex flex-col items-center w-[86px] shadow absolute -bottom-[70px] z-10 h-[140px]">
+          Get Started
+          <ArrowDown className="h-10" />
+        </button>
       </div>
     </main>
-  )
+  );
 }
