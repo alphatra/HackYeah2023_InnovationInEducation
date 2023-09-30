@@ -49,7 +49,7 @@ export function Wizard({ questions }: WizardProps) {
   const [answerId, setAnswerId] = useState<number | null>(null);
   const [result, setResult] = useState<Result>([]);
 
-  useHotkeys("a,b,c,d", (event) => {
+  useHotkeys("a,b,c,d,e,f", (event) => {
     const index = letters.indexOf(event.key.toUpperCase());
 
     if (index !== -1) {
