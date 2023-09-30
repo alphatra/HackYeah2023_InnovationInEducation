@@ -82,3 +82,19 @@ def create_item(item: Item_sch, db: Session = Depends(get_db)):
     response_item = ItemResponse(question=db_item.question, answers=answers)
     
     return response_item
+
+
+@app.get("/get_items/", response_model=List[ItemResponse])
+def get_items(db: Session = Depends(get_db)):
+    items = db.query(Item).all()
+
+    item_responses = []
+    for item in items:
+        # Extract answers from item's relationships
+        answers = [ans.answer for ans in item.answers]
+        
+        # Create a response model for each item
+        item_response = ItemResponse(question=item.question, answers=answers)
+        item_responses.append(item_response)
+
+    return item_responses
