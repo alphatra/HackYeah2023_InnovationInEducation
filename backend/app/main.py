@@ -42,10 +42,15 @@ class Item_sch(BaseModel):
     class Config:
         orm_mode = True
 
+class AnswerResponse(BaseModel):
+    answer_id: int
+    answer: str
+
 class ItemResponse(BaseModel):
     id: int
+    
     question: str
-    answers: List[str]
+    answers: List[AnswerResponse]
     class Config:
         orm_mode = True
 
@@ -76,10 +81,10 @@ def create_item(item: Item_sch, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_item)
 
-    # Extract answers from db_item's relationships
+   
     answers = [ans.answer for ans in db_item.answers]
     
-    # Create a response model for the created item
+    
     response_item = ItemResponse(question=db_item.question, answers=answers)
     
     return response_item
@@ -91,11 +96,12 @@ def get_items(db: Session = Depends(get_db)):
 
     item_responses = []
     for item in items:
-        # Extract answers from item's relationships
-        answers = [ans.answer for ans in item.answers]
+       
+        answers = [{"answer_id": ans.answer_id, "answer": ans.answer} for ans in item.answers]
         
-        # Create a response model for each item
+       
         item_response = ItemResponse(id=item.id, question=item.question, answers=answers)
         item_responses.append(item_response)
+
 
     return item_responses
