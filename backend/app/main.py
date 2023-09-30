@@ -3,9 +3,20 @@ from sqlalchemy import create_engine, Column, Integer, Text, ForeignKey, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 
 app = FastAPI()
+
+origins = ["http://localhost:3000"]  
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
 
 # Database connection
 DATABASE_URL = "mysql+mysqlconnector://root:password@hackyeah_db:3306/hackyeah_db"
@@ -115,3 +126,4 @@ def get_items(db: Session = Depends(get_db)):
 @app.post("/survey/submit")
 async def process_survey(data: Survey):
     return {"question_id":data.question_id, "answer_id": data.answer_id}
+
