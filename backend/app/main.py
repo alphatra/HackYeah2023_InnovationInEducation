@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Path
 from sqlalchemy import create_engine, Column, Integer, Text, ForeignKey, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
@@ -38,6 +38,11 @@ class Answer(Base):
     answer_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     answer = Column(String(255), index=True)
     question_id = Column(Integer, ForeignKey("items.id", ondelete="CASCADE", onupdate="CASCADE"))
+    technical = Column(Integer)
+    medical = Column(Integer)
+    lingual = Column(Integer)
+    art = Column(Integer)
+
     quest = relationship("Item", back_populates="answers")
 
 class Answer_sch(BaseModel):
@@ -68,6 +73,14 @@ class ItemResponse(BaseModel):
 class Survey(BaseModel):
     question_id: int
     answer_id: int
+
+
+class ApiForAi(BaseModel):
+    answer_id: int
+    technical: int
+    medical: int
+    lingual: int
+    art: int
    
 
 @app.on_event("startup")
@@ -121,6 +134,24 @@ def get_items(db: Session = Depends(get_db)):
 
 
     return item_responses
+
+@app.get("/get_item/{answer_id}", response_model=ApiForAi)
+def get_item(answer_id: int = Path(..., title="Answer ID", description="The ID of the answer to retrieve"), db: Session = Depends(get_db)):
+    answer = db.query(Answer).filter(Answer.answer_id == answer_id).first()
+
+    if answer is None:
+        raise HTTPException(status_code=404, detail="Answer not found")
+
+    # Create an instance of ApiForAi with the answer data
+    api_for_ai_response = ApiForAi(
+        answer_id=answer.answer_id,
+        technical=answer.technical,
+        medical=answer.medical,
+        lingual=answer.lingual,
+        art=answer.art,
+    )
+
+    return api_for_ai_response
 
 
 @app.post("/survey/submit")
