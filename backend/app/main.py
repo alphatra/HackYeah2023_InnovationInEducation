@@ -54,6 +54,11 @@ class ItemResponse(BaseModel):
     class Config:
         orm_mode = True
 
+class Survey(BaseModel):
+    question_id: int
+    answer_id: int
+   
+
 @app.on_event("startup")
 def startup_db_client():
     Base.metadata.create_all(bind=engine)
@@ -105,3 +110,8 @@ def get_items(db: Session = Depends(get_db)):
 
 
     return item_responses
+
+
+@app.post("/survey/submit")
+async def process_survey(data: Survey):
+    return {"question_id":data.question_id, "answer_id": data.answer_id}
