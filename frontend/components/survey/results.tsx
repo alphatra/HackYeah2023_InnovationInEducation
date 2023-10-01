@@ -12,6 +12,13 @@ type ResultsProps = {
   onReset: () => void;
 };
 
+const translations: Record<string, string> = {
+  lingual: "Lingwistyka",
+  medical: "Medycyna",
+  technical: "Techniczne",
+  art: "Sztuka",
+};
+
 export function Results({ data, isLoading, onReset }: ResultsProps) {
   useHotkeys("enter", () => {
     showMore();
@@ -36,7 +43,9 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
             <Circle
               size={33}
               position={
-                sortedCategories.length > 0 ? sortedCategories[0][0] : "Name"
+                sortedCategories.length > 0
+                  ? translations[sortedCategories[0][0]]
+                  : "Name"
               }
               isLoading={isLoading}
               duration={8000}
@@ -45,7 +54,9 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
             <Circle
               size={66}
               position={
-                sortedCategories.length > 1 ? sortedCategories[1][0] : "Name"
+                sortedCategories.length > 1
+                  ? translations[sortedCategories[1][0]]
+                  : "Name"
               }
               isLoading={isLoading}
               duration={14000}
@@ -54,7 +65,9 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
             <Circle
               size={100}
               position={
-                sortedCategories.length > 2 ? sortedCategories[2][0] : "Name"
+                sortedCategories.length > 2
+                  ? translations[sortedCategories[2][0]]
+                  : "Name"
               }
               isLoading={isLoading}
               duration={26000}

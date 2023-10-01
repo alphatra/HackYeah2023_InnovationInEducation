@@ -43,7 +43,7 @@ export function Header({ variant }: HeaderProps) {
                 <NavigationMenuLink
                   className={cn(navigationMenuTriggerStyle(), "text-lg")}
                 >
-                  About us
+                  O nas
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
