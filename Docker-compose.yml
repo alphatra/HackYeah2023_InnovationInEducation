@@ -15,18 +15,18 @@ services:
 
 
   # Frontend
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
-    ports:
-      - "3000:3000"
-    networks:
-      - app_network
+  #frontend:
+    #build:
+      #context: ./frontend
+      #dockerfile: Dockerfile
+    #volumes:
+      #- ./frontend:/usr/src/app
+      #- /usr/src/app/node_modules
+      #- /usr/src/app/.next
+    #ports:
+      #- "3000:3000"
+    #networks:
+      #- app_network
 
   # Database
   hackyeah_db:
