@@ -26,11 +26,11 @@ export function Results({ isLoading, onReset }: ResultsProps) {
 
   return (
     <main className="flex flex-col gap-8">
-      <div className="w-full h-full min-h-screen bg-gradient-to-b from-black to-[#003C31] text-gray-50">
-        <div className="container flex flex-col items-start py-6 gap-6">
+      <div className="w-full h-full min-h-screen bg-gradient-to-b relative overflow-hidden from-black to-[#003C31] text-gray-50">
+        <div className="container flex flex-col h-screen items-start py-6 gap-6 justify-between">
           <h1 className="text-3xl font-medium">Dopasowanie</h1>
 
-          <div className="flex relative items-center justify-center max-w-[400px] w-full self-center h-[600px]">
+          <div className="flex absolute items-center justify-center max-w-[400px] w-[calc(100%_-_48px)] left-1/2 top-[40%] md:top-1/2 -translate-x-1/2 -translate-y-1/2 aspect-square">
             <Circle
               size={32}
               position="Engineer"
@@ -54,14 +54,14 @@ export function Results({ isLoading, onReset }: ResultsProps) {
           </div>
 
           {!isLoading && (
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
+            <div className="flex flex-col-reverse md:flex-row gap-4 items-center justify-between w-full">
               <button
                 className="px-3 py-2 rounded text-blue-400 font-medium font-mono items-center disabled:opacity-60 flex gap-2 hover:bg-white/5 transition-colors"
                 onClick={() => onReset()}
               >
                 Wypełnij ponownie
               </button>
-              <div className="text-gray-400">
+              <div className="text-gray-400 text-center">
                 Im bliżej jest zawód, tym większe jest dopasowanie
               </div>
               <button

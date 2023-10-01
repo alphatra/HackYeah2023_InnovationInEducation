@@ -9,16 +9,10 @@ export default function Home() {
       <Header />
       <div className="relative container mx-auto h-[800px] flex flex-col items-center justify-center">
         <div className="absolute z-0 rounded-b-[50px] overflow-hidden w-full h-full before:content-[''] before:z-10 before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-gradient-radial before:from-transparent before:via-black/50 before:to-black">
-          <Image
-            alt="People"
-            src="/hero.png"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-          />
+          <Image alt="People" src="/hero.png" fill className="object-cover" />
         </div>
-        <Stop className="w-[340px] z-10" />
-        <h1 className="text-[70px] font-bold relative z-10 text-white text-center w-full leading-tight">
+        <Stop className="w-[200px] md:w-[340px] z-10" />
+        <h1 className="text-[48px] md:text-[70px] font-bold relative z-10 text-white text-center w-full leading-tight">
           Examine All Possibilities,
           <br />
           Pick the Best One

@@ -67,12 +67,12 @@ export function Form({ questions, onComplete }: FormProps) {
           {currentQuestionIndex + 1}. {currentQuestion.question}
         </h1>
 
-        <div className="flex flex-col gap-4 w-full md:w-1/2 pb-16">
+        <div className="flex flex-col gap-4 w-full md:w-1/2 pb-24">
           {currentQuestion.answers.map((answer, index) => (
             <button
               key={answer.answer_id}
               className={cn(
-                `px-4 py-3 rounded-md border-2 text-lg flex items-center gap-2 transition-colors`,
+                `px-4 py-3 rounded-md border-2 text-lg flex items-center gap-2 transition-colors hover:bg-gray-50`,
                 answerId === answer.answer_id
                   ? "border-blue-600"
                   : "border-gray-200"
@@ -93,7 +93,7 @@ export function Form({ questions, onComplete }: FormProps) {
                   letters[index]
                 )}
               </div>
-              <div>{answer.answer}</div>
+              <div className="text-left">{answer.answer}</div>
             </button>
           ))}
         </div>
@@ -101,7 +101,7 @@ export function Form({ questions, onComplete }: FormProps) {
         <div className="fixed left-0 bottom-0 w-full bg-white shadow-lg">
           <div className="flex items-center justify-between container px-8 py-4">
             <button
-              className="bg-gray-200 text-gray-700 px-3 transition-all hover:bg-gray-300 py-2 rounded font-medium font-mono disabled:opacity-60"
+              className="bg-gray-200 self-end text-gray-700 px-3 transition-all hover:bg-gray-300 py-2 rounded font-medium font-mono disabled:opacity-60"
               disabled={currentQuestionIndex === 0}
               onClick={() => goToPrevious()}
             >
@@ -132,7 +132,7 @@ export function Form({ questions, onComplete }: FormProps) {
               </div> */}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row items-end md:items-center gap-2">
               <Drawer.Root>
                 <Drawer.Trigger className="text-blue-600 px-3 py-2 rounded font-medium font-mono hover:bg-black/5 transition-all">
                   Objaśnienie
@@ -159,7 +159,7 @@ export function Form({ questions, onComplete }: FormProps) {
                   disabled={answerId === null}
                 >
                   Następne
-                  <div className="font-mono font-medium text-sm bg-white/30 text-white/80 h-6 flex items-center px-1 rounded">
+                  <div className="hidden md:flex font-mono font-medium text-sm bg-white/30 text-white/80 h-6 items-center px-1 rounded">
                     Enter
                   </div>
                 </button>
@@ -171,7 +171,7 @@ export function Form({ questions, onComplete }: FormProps) {
                   disabled={answerId === null}
                 >
                   Zakończ
-                  <div className="font-mono font-medium text-sm bg-white/30 text-white/80 h-6 flex items-center px-1 rounded">
+                  <div className="hidden md:flex font-mono font-medium text-sm bg-white/30 text-white/80 h-6 items-center px-1 rounded">
                     Enter
                   </div>
                 </button>
