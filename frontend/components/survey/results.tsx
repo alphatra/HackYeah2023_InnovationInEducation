@@ -43,7 +43,7 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
               value={sortedCategories.length > 0 ? sortedCategories[0][1] : 0}
             />
             <Circle
-              size={75}
+              size={66}
               position={
                 sortedCategories.length > 1 ? sortedCategories[1][0] : "Name"
               }

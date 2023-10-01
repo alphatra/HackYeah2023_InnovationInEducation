@@ -25,7 +25,7 @@ export function Header({ variant }: HeaderProps) {
     >
       <div className="container flex items-center justify-between h-16">
         <Link href="/">
-          <Logo className="h-6" />
+          <Logo className="h-8" />
         </Link>
         <NavigationMenu>
           <NavigationMenuList>

@@ -1,6 +1,6 @@
 import { Header } from "@/components/header";
 
-export default function FaqPage() {
+export default function AboutPage() {
   return (
     <main>
       <Header variant="light" />
