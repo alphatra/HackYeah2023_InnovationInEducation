@@ -128,8 +128,8 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
             <p className="text-gray-600">
               Akademia Górniczo-Hutnicza (AGH) w Krakowie to renomowana uczelnia
               techniczna, znana z doskonałego poziomu kształcenia w dziedzinie
-              nauk ścisłych i inżynieryjnych. Oferuje różnorodne programy
-              studiów i jest liderem w dziedzinie badań i innowacji.
+              nauk ścisłych. Oferuje różnorodne programy studiów i jest liderem
+              w dziedzinie badań i innowacji.
             </p>
             <div className="flex items-center gap-2 flex-row-reverse font-mono text-sm text-gray-600 font-medium">
               <button className="bg-blue-600 font-mono text-sm px-2 py-1 rounded text-white font-medium">
