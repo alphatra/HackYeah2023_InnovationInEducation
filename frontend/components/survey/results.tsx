@@ -12,7 +12,7 @@ type ResultsProps = {
   onReset: () => void;
 };
 
-export function Results({ isLoading, onReset }: ResultsProps) {
+export function Results({ data, isLoading, onReset }: ResultsProps) {
   useHotkeys("enter", () => {
     showMore();
   });
@@ -24,6 +24,8 @@ export function Results({ isLoading, onReset }: ResultsProps) {
     });
   }
 
+  const sortedCategories = data ? data[1].sort((a, b) => b[1] - a[1]) : [];
+
   return (
     <main className="flex flex-col gap-8">
       <div className="w-full h-full min-h-screen bg-gradient-to-b from-black to-[#003C31] text-gray-50">
@@ -32,23 +34,31 @@ export function Results({ isLoading, onReset }: ResultsProps) {
 
           <div className="flex relative items-center justify-center max-w-[400px] w-full self-center h-[600px]">
             <Circle
-              size={32}
-              position="Engineer"
+              size={33}
+              position={
+                sortedCategories.length > 0 ? sortedCategories[0][0] : "Name"
+              }
               isLoading={isLoading}
               duration={8000}
+              value={sortedCategories.length > 0 ? sortedCategories[0][1] : 0}
             />
             <Circle
-              size={70}
-              position="Medic"
+              size={75}
+              position={
+                sortedCategories.length > 1 ? sortedCategories[1][0] : "Name"
+              }
               isLoading={isLoading}
               duration={14000}
-              isReverse={true}
+              value={sortedCategories.length > 1 ? sortedCategories[1][1] : 0}
             />
             <Circle
               size={100}
-              position="Physics"
+              position={
+                sortedCategories.length > 2 ? sortedCategories[2][0] : "Name"
+              }
               isLoading={isLoading}
               duration={26000}
+              value={sortedCategories.length > 2 ? sortedCategories[2][1] : 0}
             />
             <User className="w-16 h-16" />
           </div>

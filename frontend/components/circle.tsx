@@ -12,10 +12,11 @@ import { useEffect } from "react";
 
 type CircleProps = {
   size: number;
-  position: string;
+  position?: string;
   isLoading?: boolean;
   duration: number;
   isReverse?: boolean;
+  value?: number;
 };
 
 export function Circle({
@@ -24,6 +25,7 @@ export function Circle({
   isLoading,
   duration,
   isReverse,
+  value,
 }: CircleProps) {
   const time = useTime();
   const rotate = useTransform(
@@ -45,9 +47,10 @@ export function Circle({
 
   useEffect(() => {
     if (!isLoading) {
-      const controls = animate(count, 100 - size, { duration: 1 });
+      const controls = animate(count, value!, { duration: 1 });
       return controls.stop;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (

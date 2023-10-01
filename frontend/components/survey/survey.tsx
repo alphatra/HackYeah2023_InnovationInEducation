@@ -3,24 +3,22 @@
 import { useState } from "react";
 import { Form } from "./form";
 import { Results } from "./results";
-import { QuestionDef, SurveyData } from "@/types/common";
+import { QuestionDef, ResultsData, SurveyData } from "@/types/common";
 
-async function submitSurvey(data: SurveyData): Promise<any> {
-  // const response = await fetch("http://localhost:8000/survey/submit", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(data),
-  // });
+async function submitSurvey(data: SurveyData): Promise<ResultsData> {
+  const response = await fetch("http://localhost:8000/survey/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      survey_entries: data,
+    }),
+  });
 
-  // const json = await response.json();
+  const json = await response.json();
 
-  // console.log(json);
-
-  // return json;
-  // delay 2s
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return json;
 }
 
 type SurveyProps = {
