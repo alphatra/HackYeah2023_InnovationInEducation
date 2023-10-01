@@ -30,6 +30,9 @@ class Survey(BaseModel):
     question_id: int
     answer_id: int
 
+class SurveyResponse(BaseModel):
+    survey_entries: List[Survey]
+
 
 class ApiForAi(BaseModel):
     answer_id: int
