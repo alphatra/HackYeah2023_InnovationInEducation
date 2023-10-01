@@ -6,15 +6,18 @@ import { Results } from "./results";
 import { QuestionDef, ResultsData, SurveyData } from "@/types/common";
 
 async function submitSurvey(data: SurveyData): Promise<ResultsData> {
-  const response = await fetch("http://localhost:8000/survey/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      survey_entries: data,
-    }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/survey/submit`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        survey_entries: data,
+      }),
+    }
+  );
 
   const json = await response.json();
 

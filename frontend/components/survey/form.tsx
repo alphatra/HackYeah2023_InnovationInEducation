@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useHotkeys } from "react-hotkeys-hook";
 import Link from "next/link";
@@ -21,19 +21,29 @@ export function Form({ questions, onComplete }: FormProps) {
   const [answerId, setAnswerId] = useState<number | null>(null);
   const [data, setData] = useState<SurveyData>([]);
 
-  useHotkeys("a,b,c,d,e,f", (event) => {
-    const index = letters.indexOf(event.key.toUpperCase());
+  useHotkeys(
+    letters.map((letter) => letter.toLocaleLowerCase()).join(","),
+    (event) => {
+      const index = letters.indexOf(event.key.toUpperCase());
 
-    if (index !== -1 && index < currentQuestion.answers.length) {
-      setAnswerId(currentQuestion.answers[index].answer_id);
+      if (index !== -1 && index < currentQuestion.answers.length) {
+        setAnswerId(currentQuestion.answers[index].answer_id);
+      }
     }
-  });
+  );
+
+  useEffect(() => {
+    setAnswerId(
+      data.find((item) => item.question_id === currentQuestion.id)?.answer_id ??
+        null
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestion]);
 
   function goToNext() {
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1);
-    setAnswerId(null);
     setData((data) => [
-      ...data,
+      ...data.filter((item) => item.question_id !== currentQuestion.id),
       {
         question_id: currentQuestion.id,
         answer_id: answerId!,
@@ -43,7 +53,6 @@ export function Form({ questions, onComplete }: FormProps) {
 
   function goToPrevious() {
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex - 1);
-    setAnswerId(null);
   }
 
   useHotkeys("enter", async () => {
@@ -66,7 +75,6 @@ export function Form({ questions, onComplete }: FormProps) {
         <h1 className="text-3xl font-medium">
           {currentQuestionIndex + 1}. {currentQuestion.question}
         </h1>
-
         <div className="flex flex-col gap-4 w-full md:w-1/2 pb-24">
           {currentQuestion.answers.map((answer, index) => (
             <button
@@ -100,58 +108,26 @@ export function Form({ questions, onComplete }: FormProps) {
 
         <div className="fixed left-0 bottom-0 w-full bg-white shadow-lg">
           <div className="flex items-center justify-between container px-8 py-4">
-            <button
-              className="bg-gray-200 self-end text-gray-700 px-3 transition-all hover:bg-gray-300 py-2 rounded font-medium font-mono disabled:opacity-60"
-              disabled={currentQuestionIndex === 0}
-              onClick={() => goToPrevious()}
-            >
-              Poprzednie
-            </button>
+            <div className="flex items-center self-end lg:w-1/3">
+              <button
+                className="bg-gray-200 self-end text-gray-700 px-3 transition-all hover:bg-gray-300 py-2 rounded font-medium font-mono disabled:opacity-60"
+                disabled={currentQuestionIndex === 0}
+                onClick={() => goToPrevious()}
+              >
+                Poprzednie
+              </button>
+            </div>
 
-            <div className="flex-col gap-1 h-1.5 w-[140px] rounded bg-gray-300 hidden md:flex relative overflow-hidden">
+            <div className="flex-col gap-1 h-1.5 w-[150px] lg:w-1/3 rounded bg-gray-300 hidden md:flex relative overflow-hidden">
               <div
                 className="bg-green-500 h-full absolute left-0 transition-all"
                 style={{
                   width: `${(currentQuestionIndex / questions.length) * 100}%`,
                 }}
               ></div>
-              {/* <div className="flex items-center gap-1">
-                {questions.map((_, index) =>
-                  currentQuestionIndex > index ? (
-                    <div
-                      key={index}
-                      className="rounded-full h-4 w-4 border border-green-500 bg-green-500 text-white flex items-center justify-center"
-                    ></div>
-                  ) : (
-                    <div
-                      key={index}
-                      className="rounded-full h-4 w-4 border border-gray-300"
-                    ></div>
-                  )
-                )}
-              </div> */}
             </div>
 
-            <div className="flex flex-col md:flex-row items-end md:items-center gap-2">
-              <Drawer.Root>
-                <Drawer.Trigger className="text-blue-600 px-3 py-2 rounded font-medium font-mono hover:bg-black/5 transition-all">
-                  Objaśnienie
-                </Drawer.Trigger>
-                <Drawer.Portal>
-                  <Drawer.Content className="bg-white shadow-sm fixed bottom-0 w-full py-10 z-20">
-                    <div className="container flex flex-col gap-4">
-                      <div className="rounded-full bg-gray-200 self-center w-16 h-1"></div>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Maiores illo esse culpa maxime possimus dolorem eveniet.
-                        Minus fugiat totam unde quaerat hic, reprehenderit
-                        corporis sit modi! Doloremque iusto quaerat non?
-                      </p>
-                    </div>
-                  </Drawer.Content>
-                  <Drawer.Overlay className="fixed bg-black/20 inset-0" />
-                </Drawer.Portal>
-              </Drawer.Root>
+            <div className="flex flex-col-reverse md:flex-row-reverse lg:w-1/3 items-end md:items-center gap-2">
               {currentQuestionIndex < questions.length - 1 && (
                 <button
                   className="bg-black px-3 py-2 rounded text-white font-medium font-mono items-center disabled:opacity-60 flex gap-2 transition-all hover:bg-black/80"
@@ -176,6 +152,25 @@ export function Form({ questions, onComplete }: FormProps) {
                   </div>
                 </button>
               )}
+              <Drawer.Root>
+                <Drawer.Trigger className="text-blue-600 px-3 py-2 rounded font-medium font-mono hover:bg-black/5 transition-all">
+                  Objaśnienie
+                </Drawer.Trigger>
+                <Drawer.Portal>
+                  <Drawer.Content className="bg-white shadow-sm fixed bottom-0 w-full py-10 z-20">
+                    <div className="container flex flex-col gap-4">
+                      <div className="rounded-full bg-gray-200 self-center w-16 h-1"></div>
+                      <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Maiores illo esse culpa maxime possimus dolorem eveniet.
+                        Minus fugiat totam unde quaerat hic, reprehenderit
+                        corporis sit modi! Doloremque iusto quaerat non?
+                      </p>
+                    </div>
+                  </Drawer.Content>
+                  <Drawer.Overlay className="fixed bg-black/20 inset-0" />
+                </Drawer.Portal>
+              </Drawer.Root>
             </div>
           </div>
         </div>
