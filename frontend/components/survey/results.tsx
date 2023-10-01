@@ -89,11 +89,45 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
       </div>
       <div className="container flex flex-col gap-6">
         <h1 className="text-3xl font-medium">Kierunki</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
           <div className="border-2 border-gray-300 rounded-md p-4 flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-medium">Informatyka</h3>
-              <img src="/uwr.svg" className="h-6" alt="UWR" />
+              <img src="/uwr.svg" className="h-6" alt="UWR Logo" />
+            </div>
+            <p className="text-gray-600">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Repellendus ea commodi sapiente perferendis eligendi libero vel
+              rerum dolor minus nostrum. Qui modi sed, laborum ipsam
+              exercitationem facilis odit accusantium quo.
+            </p>
+            <div className="flex items-center gap-2 flex-row-reverse font-mono text-sm text-gray-600 font-medium">
+              <button className="bg-blue-600 font-mono text-sm px-2 py-1 rounded text-white font-medium">
+                Więcej
+              </button>
+            </div>
+          </div>
+          <div className="border-2 border-gray-300 rounded-md p-4 flex flex-col gap-2">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-medium">Automatyka i robotyka</h3>
+              <img src="/agh_logo.jpg" className="h-6" alt="AGH Logo" />
+            </div>
+            <p className="text-gray-600">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Repellendus ea commodi sapiente perferendis eligendi libero vel
+              rerum dolor minus nostrum. Qui modi sed, laborum ipsam
+              exercitationem facilis odit accusantium quo.
+            </p>
+            <div className="flex items-center gap-2 flex-row-reverse font-mono text-sm text-gray-600 font-medium">
+              <button className="bg-blue-600 font-mono text-sm px-2 py-1 rounded text-white font-medium">
+                Więcej
+              </button>
+            </div>
+          </div>
+          <div className="border-2 border-gray-300 rounded-md p-4 flex flex-col gap-2">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-medium">Telekomunikacja</h3>
+              <img src="/pwr_logo.png" className="h-6" alt="PWR Logo" />
             </div>
             <p className="text-gray-600">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
