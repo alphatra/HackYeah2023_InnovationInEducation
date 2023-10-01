@@ -109,10 +109,10 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
               <img src="/uwr.svg" className="h-6" alt="UWR Logo" />
             </div>
             <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repellendus ea commodi sapiente perferendis eligendi libero vel
-              rerum dolor minus nostrum. Qui modi sed, laborum ipsam
-              exercitationem facilis odit accusantium quo.
+              Uniwersytet Wrocławski to czołowa uczelnia w Polsce, związana z
+              długą historią i nowoczesnym podejściem do edukacji. Oferuje
+              szeroki wybór programów studiów i jest miejscem inspirujących
+              badań.
             </p>
             <div className="flex items-center gap-2 flex-row-reverse font-mono text-sm text-gray-600 font-medium">
               <button className="bg-blue-600 font-mono text-sm px-2 py-1 rounded text-white font-medium">
@@ -126,10 +126,10 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
               <img src="/agh_logo.jpg" className="h-6" alt="AGH Logo" />
             </div>
             <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repellendus ea commodi sapiente perferendis eligendi libero vel
-              rerum dolor minus nostrum. Qui modi sed, laborum ipsam
-              exercitationem facilis odit accusantium quo.
+              Akademia Górniczo-Hutnicza (AGH) w Krakowie to renomowana uczelnia
+              techniczna, znana z doskonałego poziomu kształcenia w dziedzinie
+              nauk ścisłych i inżynieryjnych. Oferuje różnorodne programy
+              studiów i jest liderem w dziedzinie badań i innowacji.
             </p>
             <div className="flex items-center gap-2 flex-row-reverse font-mono text-sm text-gray-600 font-medium">
               <button className="bg-blue-600 font-mono text-sm px-2 py-1 rounded text-white font-medium">
@@ -143,10 +143,9 @@ export function Results({ data, isLoading, onReset }: ResultsProps) {
               <img src="/pwr_logo.png" className="h-6" alt="PWR Logo" />
             </div>
             <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repellendus ea commodi sapiente perferendis eligendi libero vel
-              rerum dolor minus nostrum. Qui modi sed, laborum ipsam
-              exercitationem facilis odit accusantium quo.
+              Politechnika Wrocławska to wiodąca uczelnia techniczna w Polsce.
+              Znana z doskonałego poziomu nauki i innowacyjności, oferuje
+              szeroki zakres kierunków inżynieryjnych i technicznych.
             </p>
             <div className="flex items-center gap-2 flex-row-reverse font-mono text-sm text-gray-600 font-medium">
               <button className="bg-blue-600 font-mono text-sm px-2 py-1 rounded text-white font-medium">
