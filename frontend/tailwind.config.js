@@ -25,6 +25,7 @@ module.exports = {
       },
       animation: {
         "scale-down": "scale-down 600ms ease-in",
+        "scale-up": "scale-up 600ms ease-in",
       },
       keyframes: {
         "scale-down": {

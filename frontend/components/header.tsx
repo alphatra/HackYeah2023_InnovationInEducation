@@ -11,34 +11,45 @@ import { Logo } from "@/components/logo";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export function Header() {
+type HeaderProps = {
+  variant?: "dark" | "light";
+};
+
+export function Header({ variant }: HeaderProps) {
   return (
-    <div className="flex text-white h-16 fixed top-0 z-20 items-center justify-between container mx-auto left-1/2 -translate-x-1/2 px-4 rounded-lg">
-      <Link href="/">
-        <Logo className="h-6" />
-      </Link>
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={cn(navigationMenuTriggerStyle(), "text-lg")}
-              >
-                FAQ
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={cn(navigationMenuTriggerStyle(), "text-lg")}
-              >
-                Blog
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+    <div
+      className={cn(
+        "fixed top-0 z-20 left-0 w-full",
+        variant === "light" ? "text-black" : "text-white"
+      )}
+    >
+      <div className="container flex items-center justify-between h-16">
+        <Link href="/">
+          <Logo className="h-6" />
+        </Link>
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/faq" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(navigationMenuTriggerStyle(), "text-lg")}
+                >
+                  FAQ
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/about-us" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(navigationMenuTriggerStyle(), "text-lg")}
+                >
+                  About us
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
     </div>
   );
 }
