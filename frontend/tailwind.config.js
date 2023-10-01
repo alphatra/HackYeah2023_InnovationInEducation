@@ -23,6 +23,19 @@ module.exports = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
+      animation: {
+        "scale-down": "scale-down 600ms ease-in",
+      },
+      keyframes: {
+        "scale-down": {
+          "0%": {
+            transform: "scale(2)",
+          },
+          "100%": {
+            transform: "scale(1)",
+          },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
