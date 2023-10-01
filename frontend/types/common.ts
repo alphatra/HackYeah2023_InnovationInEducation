@@ -14,4 +14,4 @@ export type SurveyData = {
   answer_id: number;
 }[];
 
-export type ResultsData = any;
+export type ResultsData = [string, [name: string, value: number][]];
