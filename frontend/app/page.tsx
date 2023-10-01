@@ -14,7 +14,7 @@ export default function Home() {
           <Image alt="People" src="/hero.png" fill className="object-cover" />
         </div>
         <Stop className="w-[200px] md:w-[340px] z-10 opacity-80 animate-scale-down" />
-        <h1 className="text-[48px] md:text-[70px] font-bold relative z-10 text-white text-center w-full leading-tight">
+        <h1 className="text-[48px] md:text-[70px] drop-shadow-md font-bold relative z-10 text-white text-center w-full leading-tight">
           Examine All Possibilities,
           <br />
           Pick the Best One

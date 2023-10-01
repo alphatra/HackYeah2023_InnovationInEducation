@@ -20,6 +20,20 @@ const universities = [
       "Zdjęcie autorstwa Beata Zdyb - Praca własna, CC BY-SA 3.0 pl",
     majors: ["Informatyka", "Automatyka i robotyka", "Zarządzanie"],
   },
+  {
+    id: 3,
+    name: "Akademia Górniczo-Hutnicza",
+    imagePath: "/agh.jpg",
+    imageCopyrights: "Zdjęcie autorstwa Maciej Talar / KSAF AGH, CC BY-SA 4.0",
+    majors: ["Automatyka", "Geodezja", "Matematyka", "Fizyka"],
+  },
+  {
+    id: 4,
+    name: "Politechnika Krakowska",
+    imagePath: "/pk.jpg",
+    imageCopyrights: "Zdjęcie autorstwa Farmidona - Praca własna, CC BY-SA 3.0",
+    majors: ["Architektura", "Mechanika"],
+  },
 ];
 
 export function UniversitiesGrid() {
@@ -47,7 +61,7 @@ export function UniversitiesGrid() {
           className="bg-gray-200 text-lg w-full max-w-[600px] rounded p-2"
         />
       </div>
-      <div className="container grid grid-cols-1 md:grid-cols-2 gap-4 pt-12">
+      <div className="container grid grid-cols-1 md:grid-cols-2 gap-4 py-12">
         {filteredUniversities.map((university) => (
           <div
             key={university.id}
