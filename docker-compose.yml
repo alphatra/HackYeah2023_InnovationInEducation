@@ -1,13 +1,36 @@
 version: '3.8'
 services:
+
+  # Traefik
+  traefik:
+    image: traefik:v2.10.4
+    container_name: traefik
+    ports:
+      - "80:80"      # HTTP
+      - "443:443"    # HTTPS
+      - "8080:8080"  # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+    networks:
+      - app_network
+
   # Backend
   backend:
     build: ./backend
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`backend.local`)"
+      - "traefik.http.routers.backend.service=backend"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
     volumes:
       - ./backend:/usr/src/app
     ports:
-      - 8000:8000
+      - 40105:8000
     depends_on:
     - hackyeah_db
     networks:
@@ -19,12 +42,17 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.local`)"
+      - "traefik.http.routers.frontend.service=frontend"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/.next
     ports:
-      - "3000:3000"
+      - "30322:3000"
     networks:
       - app_network
 
@@ -35,7 +63,7 @@ services:
       - hackyeah_db:/var/lib/mysql
     restart: always
     ports:
-      - "3307:3306"
+      - "40103:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 'password'
       MYSQL_DATABASE: 'hackyeah_db'
@@ -48,9 +76,14 @@ services:
     depends_on:
       - hackyeah_db
     image: phpmyadmin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.local`)"
+      - "traefik.http.routers.phpmyadmin.service=phpmyadmin"
+      - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
     restart: always
     ports:
-      - "8090:80"
+      - "40104:80"
     environment:
       PMA_HOST: hackyeah_db
       MYSQL_ROOT_PASSWORD: 'password'
